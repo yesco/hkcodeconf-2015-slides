@@ -1,0 +1,243 @@
+<html>
+
+<style>
+.slide {
+  text-align: left;
+  background: cyan;
+  color: red;
+  font-weight: bold;
+  display: table;
+  padding: 10px;
+  //border: 1px solid black;
+  //border-radius: 3px;
+  border-bottom: 1px solid black;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fit {
+  text-align: center;
+  display: inline-block;
+  clear: right;
+  white-space: pre;
+  font-size: 40px;
+  line-height: 35px;
+}
+
+.xfit:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    height: 1%;
+}
+</style>
+
+<script>
+var lastEvent, lastTarget;
+</script>
+
+<body style='position:absolute; margin:0px; padding:0px; overflow:hidden;'>
+
+<div id='menu' style='z-level:100;position:fixed;left:0px;background:black; color:white; font-size:30px'>
+<div onclick='goto(1)'><b>1</b></div>
+<div onclick='goto(2)'><b>2</b></div>
+<div onclick='goto(3)'><b>3</b></div>
+<!--
+<div onclick='zoom(current, 0.9)'><b>--</b></div>
+<div onclick='zoom(current, 1.1)'><b>++</b></div>
+-->
+<div onclick='document.getElementById("all").style.zoom=0.3;' style='show overview of all slides'><b>?</b></div>
+<div onclick='color(current, "background");'title='change the slide background color'><b>B</b></div>
+<div onclick='color(current, "color")' title='change the slide text color'><b>C</b></div>
+<div onclick='color(lastTarget, "background");' title='change the background color'><b>b</b></div>
+<div onclick='color(lastTarget, "color");' title='change the text color'><b>c</b></div>
+<div onclick='pad(lastTarget, "><")' title='shrink the text some'><b>&gt;&lt;</b></div>
+<div onclick='pad(lastTarget, "<>")' title='expand the text some'><b>&lt;&gt;</b></div>
+<div onclick='pad(lastTarget, "<")' title='move text more to the left'<b>&lt;</b></div>
+<div onclick='pad(lastTarget, ">")' title='move text more to the rigth'><b>&gt;</b></div>
+<div onclick='pad(lastTarget, "*")' title='maximize width of text'><b>*</b></div>
+</div>
+
+<div id='all' style='max-width:100%; width:100%; overflow:hidden; background:black;' contentEditable='true'
+  onclick='move(event);return true;'
+  onkeydown='move(event);'
+  onkeyup='resize();'>
+
+<div id='1' class='slide' style='background:yellow; color:blue;'>
+<div class='fit'>One one one</div>
+<div class='fit'>two</div>
+<div class='fit'>three</div>
+</div>
+
+<div id='2' class='slide' style='text-align: center;background:pink; color:black;'>
+<br>
+<div class='fit'>I did</div>
+<div class='fit' style='line-height:15px'> a </div>
+<div class='fit'>Google Takeout</div>
+<div class='fit'>
+@ codeaholics<br>
+2015 Jonas S karlsson<br>
+</div>
+</div>
+
+<div id='3' class='slide' style='vertical-align: center'>
+<div class='fit'>boring!</div>
+<div class='fit' style='color:blue'>to see is believing!</div>
+<div class='fit' style='text-align:left;xdisplay:table;'>
+
+<div>
+<ul style='line-height:20px; margin: 0px;'>
+<li>one</li>
+<li>two</li>
+<li>three</li>
+</ul>
+</div>
+
+</div>
+</div>
+
+<div style='width:100%;min-height:500px;background:green'>
+one&nbsp;<br>
+</div>
+
+</div>
+
+<script>
+function move(e) {
+  // click event move focus
+  var newTarget;
+  if (e instanceof MouseEvent) newTarget = e.target;
+
+  // tab to move
+  if (e.keyCode == 9 && lastTarget) {
+    newTarget = e.shiftKey ? lastTarget.prevElementSibling : lastTarget.nextElementSibling;
+  }
+
+  if (newTarget) {
+    if (lastTarget) {
+      lastTarget.style.outline = '';
+      lastTarget.style.outlineOffset = '';
+    }
+    lastEvent = e;
+    lastTarget = newTarget;
+//    lastTarget.style.outline = '2px dashed black';
+//    lastTarget.style.outlineOffset = '-1px';
+    lastTarget.focus();
+  }
+}
+
+function resizeIt(e) {
+  var c = e;
+  e.style.zoom = 1;
+  e.style.display = 'inline-block';
+//  e.style.width = '';
+
+  var ww = window.innerWidth;
+  var wh = window.innerHeight;
+
+  var w = c.offsetWidth;
+  var h = c.offsetHeight;
+
+  var z = ww/w * 0.8;
+  var zh = wh/e.parentNode.offsetHeight * 0.8;
+
+  console.log(e.innerText, "\n", ww, w, z);
+
+  e.style.zoom = z;
+  e.style.display = 'table-row';
+
+//e.style.transform = 'scale(' + z + ',' + zh + ')';
+//e.style.transform = 'scale(1.1, 1.3)';
+//e.style.transform = 'scale(' + z + ', 1)';
+
+}
+
+function resize() {
+  var ds = document.getElementsByClassName('fit');
+  Array.prototype.slice.call(ds).forEach(function(x){
+    resizeIt(x);
+  });
+
+  // fix height by stretch
+  var ds = document.getElementsByClassName('slide');
+  Array.prototype.slice.call(ds).forEach(function(e){
+
+var wh = window.innerHeight;
+var ww = window.innerWidth;
+e.style.height = wh;
+//e.style.width = ww;
+//return;
+
+  var wh = window.innerHeight;
+  var h = e.offsetHeight;
+  e.style.zoom = wh/h;
+  e.style.width = window.innerWidth * h/wh;
+
+//      e.style.zoom = 1;
+//      var z = wh/e.offsetHeight;
+//      e.style.height = wh/z;
+//      e.style.zoom = z * 0.90;
+  });
+
+}
+
+resize();
+window.onresize = resize;
+
+var current;
+
+function goto(id) {
+  // show only this one
+  document.getElementById("all").style.zoom=1;
+
+  current = id;
+  var e = document.getElementById(id);
+  e.scrollIntoView();
+
+  var wh = window.innerHeight;
+  var h = e.offsetHeight;
+  e.style.zoom = wh/h;
+  e.style.width = window.innerWidth * h/wh;
+//  e.style.width = '100%';
+}
+
+function zoom(id, factor) {
+  var e = id instanceof Node ? id : document.getElementById(id);
+  e.style.zoom = (e.style.zoom || 1) * factor;
+}
+
+function nextColor(last) {
+  if (last == 'black') return 'red';
+  if (last == 'red') return 'green';
+  if (last == 'green') return 'yellow';
+  if (last == 'yellow') return 'blue';
+  if (last == 'blue') return 'black';
+  return 'red';
+}
+
+function color(id, where) {
+  var e = id instanceof Node ? id : document.getElementById(id);
+  e.style[where] = nextColor(e.style[where]);
+}
+
+function pad(id, using) {
+  var e = id instanceof Node ? id : document.getElementById(id);
+  var s = e.innerHTML;
+  console.log(s);
+  if (using == '><') s = ' ' + s + ' ';
+  if (using == '<>') s = s.replace(/^ (.*) $/, '$1');
+  if (using == '>') s = s.replace(/^(.*) ?$/, ' $1');
+  if (using == '<') s = s.replace(/^ ?(.*)$/, '$1 ');
+  if (using == '*') s = s.replace(/^ *(\b.*\b) *$/, '$1');
+  e.innerHTML = s;
+  resize();
+}
+
+goto(1);
+</script>
+
+</body>
+</html>
