@@ -15,6 +15,7 @@
   height: 100%;
   overflow: hidden;
   margin-bottom: 200px;
+  margin-right: 200px;
 }
 
 .fit {
@@ -66,7 +67,7 @@ var lastEvent, lastTarget;
 <div onclick='zoom(current, 0.9)'><b>--</b></div>
 <div onclick='zoom(current, 1.1)'><b>++</b></div>
 -->
-<div onclick="document.getElementById(&quot;all&quot;).style.zoom=0.1;" style="show overview of all slides"><b>?</b></div>
+<div onclick="overview()" title="show overview of all slides"><b>?</b></div>
 <div onclick="color(current, &quot;background&quot;);" title="change the slide background color"><b>B</b></div>
 <div onclick="color(current, &quot;color&quot;)" title="change the slide text color"><b>C</b></div>
 <div onclick="color(lastTarget, &quot;background&quot;);" title="change the background color"><b>b</b></div>
@@ -80,71 +81,73 @@ var lastEvent, lastTarget;
 
 <div id="all" style="max-width: 100%; width: 100%; overflow: hidden; zoom: 1; background: white;" contenteditable="true" onclick="move(event);return true;" onkeydown="move(event);" onkeyup="resize();" onmousemove="mouse(event)">
 
-<div id="1" class="slide" style="color: blue; height: 917px; zoom: 0.977611940298508; width: 1572.19847328244px; background: yellow;">
+<div id="1" title="1" class="slide" style="color: blue; height: 917px; zoom: 0.977611940298508; width: 1572.19847328244px; background: yellow;">
 <div class="fit" style="zoom: 4.74749034749035; display: table-row;">hkcodeconf.io</div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 8.84604316546763; display: table-row;"><span style="color: yellow; background-color: blue;"> Scale </span></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row; color: yellow; background: blue;"></div>
 <div class="fit" style="zoom: 2.46907630522088; display: table-row;">(c) 2015 Jonas S Karlsson</div>
 </div>
 
-<div id="2" class="slide" style="text-align: center; color: black; height: 917px; zoom: 0.595068137573005; width: 2582.89749182116px; background: red;">
+<div id="2" title="2" class="slide" style="text-align: center; color: black; height: 917px; zoom: 0.595068137573005; width: 2582.89749182116px; background: red;">
 <br>
 <div class="fit" style="zoom: 9.99674796747968; display: table-row;">Agenda</div><div class="fit" style="zoom: 1; display: table-row;"><br></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row; color: blue; background: black;"><br></div><div class="fit" style="zoom: 1; display: table-row; color: blue; background: black;"><br></div><div class="fit" style="zoom: 7.54355828220859; display: table-row; color: blue; background: black;">what    </div><div class="fit" style="zoom: 8.5986013986014; display: table-row; color: green; background: black;">    why</div><div class="fit" style="zoom: 1; display: table-row; color: green; background: black;"><br></div><div class="fit" style="zoom: 6.68260869565217; display: table-row; color: red; background: black;">   how   </div><div class="fit" style="zoom: 6.02745098039216; display: table-row; color: blue; background: black;"><span style="color: yellow; line-height: 20px; text-align: left;">          </span></div><div class="fit" style="zoom: 1; display: table-row; color: blue; background: black;"></div><div class="fit" style="zoom: 1; display: table-row; color: green; background: black;"></div><div class="fit" style="zoom: 1; display: table-row; color: green; background: black;"></div><div class="fit" style="zoom: 1; display: table-row; color: red; background: black;"></div><div class="fit" style="zoom: 1; display: table-row; color: red; background: black;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="line-height: 15px; zoom: 1; display: table-row;"></div><div class="fit" style="line-height: 15px; zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"><br></div><div class="fit" style="zoom: 1; display: table-row;"><br></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div></div>
 
-<div id="3" class="slide" style="height: 917px; zoom: 0.744318181818182; width: 2064.97709923664px; color: yellow; background: black;">
+<div id="3" title="3" class="slide" style="height: 917px; zoom: 0.744318181818182; width: 2064.97709923664px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 12.1742574257426; display: table-row; background: blue;">what?</div><div class="fit" style="color: black; zoom: 1; display: table-row; background: blue;"></div>
   <div class="fit" style="color: red; zoom: 6.79337016574586; display: table-row;">more work</div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div>
   <div class="fit" style="color: green; zoom: 6.11741293532338; display: table-row;">reliabilty</div><div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div>
   <div class="fit" style="color: yellow; zoom: 5.56380090497738; display: table-row;">punctuality<br></div>
 </div>
 
-<div id="4" class="slide" style="height: 917px; zoom: 0.587443946188341; width: 2616.41984732824px; color: yellow; background: black;">
+<div id="4" title="4" class="slide" style="height: 917px; zoom: 0.587443946188341; width: 2616.41984732824px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 6.33814432989691; display: table-row; background: red;">more work</div>
-  <div class="fit" style="color: red; zoom: 5.71906976744186; display: table-row; background: yellow;">DEFINITION</div><div class="fit" style="color: red; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 9.53178294573644; display: table-row;">scales</div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 9.53178294573644; display: table-row;">   iff</div><div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: green; zoom: 1; display: table-row;"><span style="color: yellow;"><br></span></div><div class="fit" style="color: green; zoom: 2.72035398230089; display: table-row;"><span style="color: yellow;">adding more resources</span></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 2.72035398230089; display: table-row;">gives more processing</div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div></div><div id="5" class="slide" style="height: 917px; zoom: 0.432955618508026; width: 3550.01744820065px; color: yellow; background: black;"><div class="fit" style="color: black; zoom: 1; display: table-row; background: green;"></div>
+  <div class="fit" style="color: red; zoom: 5.71906976744186; display: table-row; background: yellow;">DEFINITION</div><div class="fit" style="color: red; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 9.53178294573644; display: table-row;">scales</div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 9.53178294573644; display: table-row;">   iff</div><div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: green; zoom: 1; display: table-row;"><span style="color: yellow;"><br></span></div><div class="fit" style="color: green; zoom: 2.72035398230089; display: table-row;"><span style="color: yellow;">adding more resources</span></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 2.72035398230089; display: table-row;">gives more processing</div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div></div>
+
+<div id="5" title="5" class="slide" style="height: 917px; zoom: 0.432955618508026; width: 3550.01744820065px; color: yellow; background: black;"><div class="fit" style="color: black; zoom: 1; display: table-row; background: green;"></div>
   <div class="fit" style="color: black; zoom: 3.06633416458853; display: table-row; background: red;">linear scalability</div><div class="fit" style="color: yellow; zoom: 55.8909090909091; display: table-row; background: black;">x<br></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: green;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: green;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: green;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: black;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="color: red; zoom: 55.8909090909091; display: table-row;"> </div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div>
 </div>
 
-<div id="6" class="slide" style="height: 917px; zoom: 0.746742671009772; width: 2058.27262813522px; color: yellow; background: black;">
+<div id="6" title="6" class="slide" style="height: 917px; zoom: 0.746742671009772; width: 2058.27262813522px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 12.1742574257426; display: table-row; background: blue;">what?</div>
   <div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 6.79337016574586; display: table-row;">more work</div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div>
   <div class="fit" style="color: green; zoom: 6.11741293532338; display: table-row;">reliabilty</div><div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div>
   <div class="fit" style="color: yellow; zoom: 5.56380090497738; display: table-row;">punctuality</div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"><br></div>
 </div>
 
-<div id="7" class="slide" style="height: 917px; zoom: 0.419487648673376; width: 3663.99345692476px; color: yellow; background: black;">
+<div id="7" title="7" class="slide" style="height: 917px; zoom: 0.419487648673376; width: 3663.99345692476px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 5.21016949152542; display: table-row; background: green;">reliability</div>
   <div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 7.14883720930233; display: table-row;">overload</div><div class="fit" style="color: red; zoom: 28.5953488372093; display: table-row;">NO</div><div class="fit" style="color: red; zoom: 14.2976744186047; display: table-row;">stop</div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: green; zoom: 2.28975791433892; display: table-row;">can handle 100 requests/s<br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div>
   <div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div>
 </div>
 
-<div id="8" class="slide" style="height: 917px; zoom: 0.261925164238789; width: 5868.08833151581px; color: yellow; background: black;">
+<div id="8" title="8" class="slide" style="height: 917px; zoom: 0.261925164238789; width: 5868.08833151581px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 5.23234042553192; display: table-row; background: yellow;">punctuality</div>
   <div class="fit" style="color: red; zoom: 7.1906432748538; display: table-row;">response</div><div class="fit" style="color: red; zoom: 14.4658823529412; display: table-row;">TIME<br></div><div class="fit" style="color: green; zoom: 58.552380952381; display: table-row;">&lt;</div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 14.4658823529412; display: table-row;">10ms</div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div>
 </div>
 
-<div id="9" class="slide" style="height: 917px; zoom: 0.914257228315055; width: 1681.14612868048px; color: yellow; background: black;">
+<div id="9" title="9" class="slide" style="height: 917px; zoom: 0.914257228315055; width: 1681.14612868048px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 7.73333333333333; display: table-row; background: yellow;">punctual<br></div>
   <div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 6.86927374301676; display: table-row;">fail fast</div><div class="fit" style="color: blue; zoom: 4.1123745819398; display: table-row;">no hidden retry<br></div>
   <div class="fit" style="color: green; zoom: 5.61461187214612; display: table-row;">predictable</div><div class="fit" style="color: green; zoom: 1; display: table-row;"><br></div>
   <div class="fit" style="color: yellow; zoom: 1; display: table-row;"><br></div>
 </div>
 
-<div id="10" class="slide" style="height: 917px; zoom: 0.666424418604651; width: 2306.33805888768px; background: black;">
+<div id="10" title="10" class="slide" style="height: 917px; zoom: 0.666424418604651; width: 2306.33805888768px; background: black;">
   <div class="fit" style="color: black; zoom: 15.1802469135802; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">why?</div><div class="fit" style="color: black; zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><br></div><div class="fit" style="color: black; zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"><br></div><div class="fit" style="color: black; zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"></div>
   <div class="fit" style="zoom: 1; display: table-row;"><font color="#008000"><br></font></div><div class="fit" style="zoom: 1; display: table-row;"><font color="#008000"><br></font></div><div class="fit" style="zoom: 4.32957746478873; display: table-row;"><font color="#008000">growth hacking</font></div><div class="fit" style="zoom: 1; display: table-row;"><font color="#008000"><br></font></div><div class="fit" style="zoom: 1; display: table-row;"><font color="#008000"><br></font></div><div class="fit" style="zoom: 1; display: table-row;"><font color="#008000"><br></font></div><div class="fit" style="zoom: 3.36876712328767; display: table-row;"><font color="#008000" style="color: red;">NO CRASH AND BURN!</font></div><div class="fit" style="zoom: 1; display: table-row;"><font color="#008000" style="color: red;"><br></font></div><div class="fit" style="zoom: 6.05714285714286; display: table-row;"><font color="#008000">save money</font></div><div class="fit" style="zoom: 1; display: table-row;"><font color="#008000"><br></font></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div>
   <div class="fit" style="color: yellow; zoom: 1; display: table-row;"><br></div>
 </div>
 
-<div id="11" class="slide" style="height: 917px; zoom: 0.33248730964467; width: 4622.73282442748px; background: black;">
+<div id="11" title="11" class="slide" style="height: 917px; zoom: 0.33248730964467; width: 4622.73282442748px; background: black;">
   <div class="fit" style="color: red; zoom: 1; display: table-row; background: black;"><br></div><div class="fit" style="color: red; zoom: 55.8909090909091; display: table-row; background: black;">$</div><div class="fit" style="color: red; zoom: 1; display: table-row; background: black;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row; background: black;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row; background: black;"><br></div><div class="fit" style="color: red; zoom: 3.31428571428572; display: table-row; background: black;">        per      </div><div class="fit" style="color: red; zoom: 14.1333333333333; display: table-row; background: black;">user</div><div class="fit" style="color: red; zoom: 1; display: table-row; background: black;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row; background: red;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: green; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"></div><div class="fit" style="color: red; zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div>
   <div class="fit" style="color: yellow; zoom: 1; display: table-row;"><br></div>
 </div>
 
-<div id="12" class="slide" style="height: 917px; zoom: 0.498369565217391; width: 3084.05670665213px; background: black;">
+<div id="12" title="12" class="slide" style="height: 917px; zoom: 0.498369565217391; width: 3084.05670665213px; background: black;">
   <div class="fit" style="color: black; zoom: 15.5645569620253; display: table-row; background-image: initial; background-attachment: initial; background-color: red; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">how?<br></div>
   <div class="fit" style="color: red; zoom: 4.43898916967509; display: table-row;">plan:         </div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: red; zoom: 1; display: table-row;"><br></div><div class="fit" style="color: green; zoom: 8.91014492753623; display: table-row; background-image: initial; background-attachment: initial; background-color: black; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">1.split
 <span style="color: red;">2.kill </span><br></div><div class="fit" style="zoom: 1; display: table-row; background-image: initial; background-attachment: initial; background-color: black; background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;"></div><div class="fit" style="zoom: 1; display: table-row; color: red;"></div><div class="fit" style="color: blue; zoom: 10.3327731092437; display: table-row;"><span style="color: blue;">3.log&nbsp;</span></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"><span style="color: blue;"><br></span></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"></div><div class="fit" style="color: blue; zoom: 1; display: table-row;"></div><div class="fit" style="color: green; zoom: 1; display: table-row;"></div><div class="fit" style="color: yellow; zoom: 1; display: table-row;"></div>
 </div>
 
-<div id="13" class="slide" style="height: 917px; zoom: 0.849860982391103; width: 1808.53107960742px; color: yellow; background: black;">
+<div id="13" title="13" class="slide" style="height: 917px; zoom: 0.849860982391103; width: 1808.53107960742px; color: yellow; background: black;">
   <div class="fit" style="color: black; zoom: 7.36287425149701; display: table-row; background: yellow;">Question</div><div class="fit" style="color: black; zoom: 6.57540106951872; display: table-row; background: yellow;">    &amp;    <br> </div><div class="fit" style="color: black; zoom: 9.8368; display: table-row; background: yellow;">Answer<br></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: red;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: red;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: red;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div><div class="fit" style="color: black; zoom: 1; display: table-row; background: yellow;"></div>
   <div class="fit" style="color: red; zoom: 1; display: table-row;"><br>
 
@@ -243,12 +246,27 @@ e.style.height = wh;
 
 }
 
+function overview() {
+  var d = document.getElementById("all");
+  d.style.zoom = 0.15;
+  d.style["-webkit-column-count"] = 6;
+  d.contentEditable = "false";
+}
+
+function normal() {
+  var d = document.getElementById("all");
+  d.style.zoom = 1;
+  d.style["-webkit-column-count"] = 1;
+  d.contentEditable = "true";
+}
+
 resize();
 window.onresize = resize;
 
 var current;
 
 function goto(id) {
+  normal();
   var slides = document.getElementsByClassName("slide");
 
   if (id === -1) id = slides.length;
@@ -257,11 +275,12 @@ function goto(id) {
   // show only this one
   document.getElementById("all").style.zoom=1;
 
-  var last = current;
   var e = document.getElementById(id);
   if (!e) return;
 
   current = id;
+
+  // update current indicator
   var c = document.getElementById("current");
   if (c) c.innerText = current + "/" + slides.length;
 
@@ -276,6 +295,12 @@ function goto(id) {
 
 function next() {  goto(current+1); }
 function prev() {  goto(current-1); }
+
+var slides = document.getElementsByClassName("slide");
+
+Array.prototype.slice.call(slides).forEach(function(s, i){
+  s.onclick = function(){ goto(+ s.id); };
+});
 
 function zoom(id, factor) {
   var e = id instanceof Node ? id : document.getElementById(id);
