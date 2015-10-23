@@ -14,6 +14,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  margin-bottom: 200px;
 }
 
 .fit {
@@ -37,9 +38,12 @@
   z-level: 100;
   position: fixed;
   top: 0px;
-  background:black;
-  color:white;
+  background: black;
+  color: white;
   font-size:50px;
+  border: 5px;
+  border-radius: 50px 50px 50px 50px;
+  font-weight: bold;
 }
 </style>
 
@@ -49,29 +53,19 @@ var lastEvent, lastTarget;
 
 </head><body style="position:absolute; margin:0px; padding:0px; overflow:hidden;">
 
-<div class="nav" style="left:0px;" onclick="prev()"><b>&lt;&lt;</b></div>
-<div class="nav" style="right:0px;" onclick="next()"><b>&gt;&gt;</b></div>
+<div class="nav" style="left:0px;">
+  <span onclick="goto(1)">|</span><span onclick="prev()">&lt;&lt;</span>
+</div>
+<div class="nav" style="right:0px;">
+  <span onclick="next()">&gt;&gt;</span><span onclick="goto(-1)">|</span>
+</div>
 
-
-<div id="menu" style="z-level:100;position:fixed;left:0px;top:100px;background:black; color:white; font-size:30px">
-<div onclick="goto(1)"><b>1</b></div>
-<div onclick="goto(2)"><b>2</b></div>
-<div onclick="goto(3)"><b>3</b></div>
-<div onclick="goto(4)"><b>4</b></div>
-<div onclick="goto(5)"><b>5</b></div>
-<div onclick="goto(6)"><b>6</b></div>
-<div onclick="goto(7)"><b>7</b></div>
-<div onclick="goto(8)"><b>8</b></div>
-<div onclick="goto(9)"><b>9</b></div>
-<div onclick="goto(10)"><b>10</b></div>
-<div onclick="goto(11)"><b>11</b></div>
-<div onclick="goto(12)"><b>12</b></div>
-<div onclick="goto(13)"><b>13</b></div>
+<div id="menu" style="z-level:100;position:fixed;left:0px;top:100px;background:black;color:white;font-size:30px">
 <!--
 <div onclick='zoom(current, 0.9)'><b>--</b></div>
 <div onclick='zoom(current, 1.1)'><b>++</b></div>
 -->
-<div onclick="document.getElementById(&quot;all&quot;).style.zoom=0.3;" style="show overview of all slides"><b>?</b></div>
+<div onclick="document.getElementById(&quot;all&quot;).style.zoom=0.1;" style="show overview of all slides"><b>?</b></div>
 <div onclick="color(current, &quot;background&quot;);" title="change the slide background color"><b>B</b></div>
 <div onclick="color(current, &quot;color&quot;)" title="change the slide text color"><b>C</b></div>
 <div onclick="color(lastTarget, &quot;background&quot;);" title="change the background color"><b>b</b></div>
@@ -83,7 +77,7 @@ var lastEvent, lastTarget;
 <div onclick="pad(lastTarget, &quot;*&quot;)" title="maximize width of text"><b>*</b></div>
 </div>
 
-<div id="all" style="max-width: 100%; width: 100%; overflow: hidden; zoom: 1; background: black;" contenteditable="true" onclick="move(event);return true;" onkeydown="move(event);" onkeyup="resize();">
+<div id="all" style="max-width: 100%; width: 100%; overflow: hidden; zoom: 1; background: white;" contenteditable="true" onclick="move(event);return true;" onkeydown="move(event);" onkeyup="resize();" onmousemove="mouse(event)">
 
 <div id="1" class="slide" style="color: blue; height: 917px; zoom: 0.977611940298508; width: 1572.19847328244px; background: yellow;">
 <div class="fit" style="zoom: 4.74749034749035; display: table-row;">hkcodeconf.io</div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 8.84604316546763; display: table-row;"><span style="color: yellow; background-color: blue;"> Scale </span></div><div class="fit" style="zoom: 1; display: table-row;"></div><div class="fit" style="zoom: 1; display: table-row; color: yellow; background: blue;"></div>
@@ -163,6 +157,13 @@ one&nbsp;<br>
 </div>
 
 <script>
+function mouse(e) {
+  var ratio = (1 - e.clientX / screen.width);
+  var d = document.getElementById("menu");
+  // only when really close
+  d.style.opacity = ratio*ratio*ratio*ratio;
+}
+
 function move(e) {
   // click event move focus
   var newTarget;
@@ -247,6 +248,10 @@ window.onresize = resize;
 var current;
 
 function goto(id) {
+  if (id === -1) {
+    var slides = document.getElementsByClassName("slide");
+    id = slides.length;
+  }
   if (current < 0) current = 1;
 
   // show only this one
