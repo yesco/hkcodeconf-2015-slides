@@ -1,6 +1,8 @@
-
 <!-- saved from url=(0058)file:///home/knoppix/GIT/hkcodeconf-2015-slides/index.html -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 2015 (C) Jonas S Karlsson slides using css/javascript/bigletters -->
+<style>
+
 .slide {
   text-align: left;
   background: cyan;
@@ -62,6 +64,7 @@ var lastEvent, lastTarget;
 </div>
 
 <div id="menu" style="position: fixed; left: 0px; top: 100px; color: white; font-size: 30px; opacity: 0.0011121582801934; background: black;">
+<div onclick="about()" title="show about" style="background:red;color:white;">about</div>
 <div id="current" onclick="goto(current)" style="background:white;color:black;border:2px solid black;">13/13</div>
 <!--
 <div onclick='zoom(current, 0.9)'><b>--</b></div>
@@ -167,6 +170,10 @@ one&nbsp;<br>
 </div>
 
 <script>
+function about() {
+  alert("(C) 2015 Jonas S Karlsson, slides, jsk@yesco.org");
+}
+
 function mouse(e) {
   var ratio = (1 - e.clientX / screen.width);
   var d = document.getElementById("menu");
@@ -362,6 +369,7 @@ function pad(id, using) {
   var e = id instanceof Node ? id : document.getElementById(id);
   var s = e.innerHTML;
   console.log(s);
+  using = using.replace('&lt;', '<').replace('&gt;', '>');
   if (using == '><') s = ' ' + s + ' ';
   if (using == '<>') s = s.replace(/^ (.*) $/, '$1');
   if (using == '>') s = s.replace(/^(.*) ?$/, ' $1');
