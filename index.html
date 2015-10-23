@@ -68,10 +68,16 @@ var lastEvent, lastTarget;
 <div onclick='zoom(current, 1.1)'><b>++</b></div>
 -->
 <div onclick="overview()" title="show overview of all slides"><b>?</b></div>
+<br>
+<div onclick="newslide(current)" title="insert a new slide here"><b>+</b></div>
+<div onclick="newslide()" title="new slide at end"><b>++</b></div>
+<br>
 <div onclick="color(current, &quot;background&quot;);" title="change the slide background color"><b>B</b></div>
 <div onclick="color(current, &quot;color&quot;)" title="change the slide text color"><b>C</b></div>
+<br>
 <div onclick="color(lastTarget, &quot;background&quot;);" title="change the background color"><b>b</b></div>
 <div onclick="color(lastTarget, &quot;color&quot;);" title="change the text color"><b>c</b></div>
+<br>
 <div onclick="pad(lastTarget, &quot;&gt;&lt;&quot;)" title="shrink the text some"><b>&gt;&lt;</b></div>
 <div onclick="pad(lastTarget, &quot;&lt;&gt;&quot;)" title="expand the text some"><b>&lt;&gt;</b></div>
 <div onclick="pad(lastTarget, &quot;&lt;&quot;)" title="move text more to the left" <b="">&lt;</div>
@@ -166,6 +172,43 @@ function mouse(e) {
   var d = document.getElementById("menu");
   // only when really close
   d.style.opacity = ratio*ratio*ratio*ratio;
+}
+
+function renumber() {
+  var slides = document.getElementsByClassName("slide");
+  
+  Array.prototype.slice.call(slides).forEach(function(s, i){
+    s.id = i + 1;
+    s.title = s.id;
+    s.onclick = function(){ goto(+ s.id); };
+    s.style["-webkit-column-break-inside"] = "avoid";
+  });
+}
+
+function newslide(pos) {
+  var s = '<div id="N" title="N" class="slide" style="color: yellow; background: black;">\n' + 
+    '  <div class="fit" style="color: black; display: table-row; background: blue;">NEWSLIDE</div>\n' +
+    '  <div class="fit" style="color: red; display: table-row;">something</div>\n' + 
+    '  <div class="fit" style="color: green; display: table-row;">else</div>\n' +
+    '  <div class="fit" style="color: blue; display: table-row;">right?</div>\n' + 
+  '</div>';
+  if (pos) {
+    var d = document.getElementById(pos);
+    d.insertAdjacentHTML("beforebegin", s);
+    renumber();
+    goto(current);
+    goto(current);
+    goto(current);
+  } else {
+    var d = document.getElementById("all");
+    d.insertAdjacentHTML("beforeend", s);
+    renumber();
+    goto(-1);
+    goto(-1);
+    goto(-1);
+  }
+  // this fixes multicolumn overview "woles"
+  window.resize();
 }
 
 function move(e) {
@@ -296,12 +339,6 @@ function goto(id) {
 function next() {  goto(current+1); }
 function prev() {  goto(current-1); }
 
-var slides = document.getElementsByClassName("slide");
-
-Array.prototype.slice.call(slides).forEach(function(s, i){
-  s.onclick = function(){ goto(+ s.id); };
-});
-
 function zoom(id, factor) {
   var e = id instanceof Node ? id : document.getElementById(id);
   e.style.zoom = (e.style.zoom || 1) * factor;
@@ -334,17 +371,10 @@ function pad(id, using) {
   resize();
 }
 
+renumber();
 goto(1);
 goto(1);
 goto(1);
 </script>
-
-
-
-
-
-
-
-
 
 </body></html>
